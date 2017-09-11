@@ -1,0 +1,89 @@
+﻿<!DOCTYPE html>
+<html ng-app="app">
+<head >
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width" />
+    <script src="~/Scripts/jquery-1.10.2.js"></script>
+    <script src="~/Scripts/angular.js"></script>
+    <script src="~/Angular/app.js"></script>
+    @*<script>
+        $(function () {
+            $("#btn").click(function () {
+                var data = {
+                    Email: "trang.duong39@yahoo.com.vn",
+                    Password: "25021996Aa",
+                    ConfirmPassword: "25021996Aa"
+                };
+
+                $.ajax({
+                    type: 'POST',
+                    url: '/api/Account/Register',
+                    contentType: 'application/json; charset=utf-8',
+                    data: JSON.stringify(data)
+                }).done(function (data) {
+                        self.result("Done!");
+                    }).fail(alert("cc"));
+            });
+
+            $("#login").click(function () {
+                var loginData = {
+                    grant_type: 'password',
+                    username: "trang.duong39@yahoo.com.vn",
+                    password: "25021996Aa"
+                };
+
+                $.ajax({
+                    type: 'POST',
+                    url: '/Token',
+                    data: loginData
+                }).done(function (data) {
+                    alert(data.userName);
+                    window.location.href = "/Home/Test/";
+                    // Cache the access token in session storage.
+                    sessionStorage.setItem(tokenKey, data.access_token);
+                }).fail(alert("nhu cc"));
+            });
+        });
+    </script>*@
+    <title>@ViewBag.Title</title>
+    @Styles.Render("~/Content/css")
+    @Scripts.Render("~/bundles/modernizr")
+</head>
+<body ng-controller="appController">
+    <div class="navbar navbar-inverse navbar-fixed-top">
+        <div class="container">
+            <div class="navbar-header">
+                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+                @Html.ActionLink("Application name", "Index", "Home", new { area = "" }, new { @class = "navbar-brand" })
+            </div>
+            <button id="btn">Submit</button><br />
+            <input type="text" ng-model="username"/>
+            <div>{{username}}</div>
+            <input type="password" id="password" ng-model="password"/>
+            <button id="login" ng-click="login()">Login</button>
+            <div>{{Data}}</div>
+            <div class="navbar-collapse collapse">
+                <ul class="nav navbar-nav">
+                    <li>@Html.ActionLink("Home", "Index", "Home", new { area = "" }, null)</li>
+                    <li>@Html.ActionLink("API", "Index", "Help", new { area = "" }, null)</li>
+                </ul>
+            </div>
+        </div>
+    </div>
+    <div class="container body-content">
+        @RenderBody()
+        <hr />
+        <footer>
+            <p>&copy; @DateTime.Now.Year - My ASP.NET Application</p>
+        </footer>
+    </div>
+
+    @Scripts.Render("~/bundles/jquery")
+    @Scripts.Render("~/bundles/bootstrap")
+    @RenderSection("scripts", required: false)
+</body>
+</html>
